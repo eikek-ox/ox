@@ -1,0 +1,27 @@
+version: '3'
+services:
+  ox-mysql:
+    image: "mysql:5.5"
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PW}"
+    volumes:
+     - vol_mysql:/var/lib/mysql
+  ox-backend:
+    image: "eikek/ox-backend"
+    restart: always
+    volumes:
+      - vol_etc:/opt/open-xchange/etc
+      - vol_filestore:/var/opt/filestore
+  ox-web:
+    image: "eikek/ox-web"
+    restart: always
+    environment:
+      VIRTUAL_HOST:       "${VIRTUAL_HOST}"
+      LETSENCRYPT_HOST:   "${VIRTUAL_HOST}"
+      LETS_ENCRYPT_EMAIL: "${LETS_ENCRYPT_EMAIL}"
+
+volumes:
+  vol_mysql:
+  vol_etc:
+  vol_filestore:

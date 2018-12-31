@@ -1,11 +1,4 @@
 version: '2'
-environment:
-  MYSQL_ROOT_PW: ""
-  # e.g. VIRTUAL_HOST=ox.example.com
-  HOSTNAME: ""
-  # e-mail address used for creating letsencrypt certificates
-  LETS_ENCRYPT_EMAIL: ""
-  COMPOSE_PROJECT_NAME: "my-ox"
 services:
   ox-mysql:
     image: "mysql:5.5"

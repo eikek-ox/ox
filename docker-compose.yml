@@ -1,4 +1,11 @@
-version: '3'
+version: '2'
+environment:
+  MYSQL_ROOT_PW: ""
+  # e.g. VIRTUAL_HOST=ox.example.com
+  HOSTNAME: ""
+  # e-mail address used for creating letsencrypt certificates
+  LETS_ENCRYPT_EMAIL: ""
+  COMPOSE_PROJECT_NAME: "my-ox"
 services:
   ox-mysql:
     image: "mysql:5.5"
@@ -10,17 +17,22 @@ services:
   ox-backend:
     image: "eikek/ox-backend"
     restart: always
+    environment:
+      MYSQL_ROOT_PW: "${MYSQL_ROOT_PW}"
+    links:
+      - ox-mysql:mysql
     volumes:
       - vol_etc:/opt/open-xchange/etc
       - vol_filestore:/var/opt/filestore
   ox-web:
     image: "eikek/ox-web"
     restart: always
+    links:
+      - ox-backend:ox-backend
     environment:
-      VIRTUAL_HOST:       "${VIRTUAL_HOST}"
-      LETSENCRYPT_HOST:   "${VIRTUAL_HOST}"
+      VIRTUAL_HOST:       "${HOSTNAME}"
+      LETSENCRYPT_HOST:   "${HOSTNAME}"
       LETS_ENCRYPT_EMAIL: "${LETS_ENCRYPT_EMAIL}"
-
 volumes:
   vol_mysql:
   vol_etc:

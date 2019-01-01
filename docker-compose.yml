@@ -1,8 +1,16 @@
 version: '2'
+networks:
+  internal:
+    driver: default
+  to_external:
+    external:
+      name: bridge
 services:
   ox-mysql:
     image: "mysql:5.5"
     restart: always
+    networks:
+    - internal
     environment:
       MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PW}"
     volumes:
@@ -10,6 +18,8 @@ services:
   ox-backend:
     image: "eikek/ox-backend"
     restart: always
+    networks:
+    - internal
     environment:
       MYSQL_ROOT_PW: "${MYSQL_ROOT_PW}"
     links:
@@ -20,6 +30,9 @@ services:
   ox-web:
     image: "eikek/ox-web"
     restart: always
+    networks:
+    - internal
+    - to_external
     links:
       - ox-backend:ox-backend
     environment:

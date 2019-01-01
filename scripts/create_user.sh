@@ -8,7 +8,9 @@ read -e -p "SMTP server: " -i "$DEFAULT_SMTP_SERVER" SMTP_SERVER
 read -e -p "Imap login: " -i "$DEFAULT_IMAP_LOGIN" IMAP_LOGIN
 read -e -p "E-Mail: " -i "$DEFAULT_EMAIL" EMAIL
 read -e -p "Username: " USERNAME
+stty -echo
 read -e -p "Password: " PASSWORD
+stty echo
 
 echo "Executing create user command in running ox-backend container..."
 #docker exec -i ox-backend -e PASSWORD="$PASSWORD" /opt/open-xchange/sbin/dockerox_create_user

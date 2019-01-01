@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 source ../.env
 BACKEND_CONTAINER_NAME="${COMPOSE_PROJECT_NAME}_ox-backend_1"
 echo "Please enter login data for new user account"

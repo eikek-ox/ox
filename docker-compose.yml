@@ -3,7 +3,7 @@ networks:
   internal:
   to_reverse_proxy:
     external:
-      name: proxynet
+      name: "${PROXYNET}"
 services:
   ox-mysql:
     image: "mysql:5.5"

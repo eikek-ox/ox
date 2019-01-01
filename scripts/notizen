@@ -1,0 +1,92 @@
+docker run --name some-mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:tag
+
+
+env
+HOSTNAME=8c7d92e1563e
+MYSQL_ENV_MYSQL_ROOT_PASSWORD=my-secret-pw
+MYSQL_PORT_3306_TCP_PORT=3306
+MYSQL_PORT_3306_TCP=tcp://172.17.0.9:3306
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+PWD=/
+MYSQL_ENV_MYSQL_VERSION=5.7.8-rc
+SHLVL=1
+HOME=/root
+MYSQL_NAME=/furious_kilby/mysql
+MYSQL_PORT_3306_TCP_PROTO=tcp
+MYSQL_PORT_3306_TCP_ADDR=172.17.0.9
+MYSQL_ENV_MYSQL_MAJOR=5.7
+MYSQL_PORT=tcp://172.17.0.9:3306
+_=/usr/bin/env
+
+
+/opt/open-xchange/sbin/initconfigdb
+
+/opt/open-xchange/sbin/initconfigdb currently knows the following parameters:
+
+Parameter                      | Default value
+------------------------------------------------------------
+--configdb-user                | openexchange
+--configdb-pass                |
+--configdb-host                | localhost
+--configdb-port                | 3306
+--configdb-dbname              | configdb
+--addon-sql                    |
+--mysql-root-user              | root
+--mysql-root-passwd            |
+
+
+NOTE: use "-a" to create SQL admin user using GRANT command
+use -i to automatically delete the configdb if exists
+
+
+Example:
+
+  /opt/open-xchange/sbin/initconfigdb --configdb-pass=secret
+
+/opt/open-xchange/sbin/initconfigdb --configdb-host=$MYSQL_PORT_3306_TCP_ADDR
+/opt/open-xchange/sbin/initconfigdb --configdb-host=mysql --configdb-pass=my-secret-pw
+
+docker run -i --link some-mysql:mysql 10b
+
+root@f0428be71897:/opt/open-xchange/etc# /opt/open-xchange/sbin/oxinstaller                                                                                                                                   /opt/open-xchange/sbin/oxinstaller currently knows the following parameters:
+
+Parameter               | Default value                                 | Possible values
+--------------------------------------------------------------------------------------------
+--servername            |                                               |
+--imapserver            | f0428be71897                                  |
+--smtpserver            | f0428be71897                                  |
+--mail-login-src        | login                                         | login mail name
+--mail-server-src       | user                                          | user global
+--transport-server-src  | user                                          | user global
+--configdb-user         | openexchange                                  |
+--configdb-pass         |                                               |
+--configdb-readhost     | localhost                                     |
+--configdb-writehost    | localhost                                     |
+--configdb-dbname       | configdb                                      |
+--servermemory          |                                               |
+--clt-memory            | 50                                            |
+--configdb-readport     | 3306                                          |
+--configdb-writeport    | 3306                                          |
+--tmpdir-path           | /var/spool/open-xchange/uploads               |
+--master-pass           |                                               |
+--master-user           | oxadminmaster                                 |
+--jkroute               | APP1                                          |
+--object-link-hostname  | f0428be71897                                  |
+--extras-link           | http://f0428be71897/                          |
+--maxSession            | 0                                             |
+--sessionDefLifeTime    | 3600000                                       |
+--disableauth           |                                               |
+--no-license            |                                               |
+--add-license           |                                               |
+--name-of-oxcluster     | f0428be71897                                  |
+--network-listener-host | localhost                                     |
+--ajp-bind-port         |                                               |
+
+Example:
+
+  /opt/open-xchange/sbin/oxinstaller --servername=ox6 --configdb-pass=secret --master-pass=secret --add-license=f-o-o-b-a-r --servermemory 512 --name-of-oxcluster myoxcluster
+
+use -D for Debug mode
+
+
+

@@ -1,6 +1,6 @@
 #!/bin/sh
 source ../.env
-BACKEND_CONTAINER_NAME="${COMPOSE_PROJECT_NAME}_ox-backend_1
+BACKEND_CONTAINER_NAME="${COMPOSE_PROJECT_NAME}_ox-backend_1"
 echo "Please enter login data for new user account"
 read -e -p "IMAP server: " -i "$DEFAULT_IMAP_SERVER" IMAP_SERVER
 read -e -p "SMTP server: " -i "$DEFAULT_SMTP_SERVER" SMTP_SERVER
